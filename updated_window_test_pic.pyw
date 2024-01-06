@@ -29,6 +29,16 @@ def on_no_click():
 
 # Create the main window
 window = tk.Tk()
+
+def clean_up():
+    # Delete the lock file if it exists
+    if os.path.exists(lock_file_path):
+        os.remove(lock_file_path)
+    # Close the application
+    window.destroy()
+
+# Bind the clean_up function to the window close event
+window.protocol("WM_DELETE_WINDOW", clean_up)
 window.title("Yes or No")
 
 # Get screen width and height
