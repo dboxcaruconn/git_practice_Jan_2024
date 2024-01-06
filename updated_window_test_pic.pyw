@@ -36,8 +36,6 @@ finally:
     # The lock will be released when the 'with' block is exited, either normally or through an exception.
     logging.debug("Application is closing.")
 
-from PIL import Image, ImageTk
-
 def on_yes_click():
     for widget in window.winfo_children():
         widget.destroy()
