@@ -15,7 +15,16 @@ logging.basicConfig(filename='application.log', level=logging.DEBUG,
 mutex_name = "window_test_pic_python_practice"
 
 # Try to create a mutex
+logging.debug("Attempting to create mutex.")
 mutex_handle = win32event.CreateMutex(None, False, mutex_name)
+last_error = win32api.GetLastError()
+logging.debug(f"Mutex created, last error: {last_error}")
+
+if last_error == winerror.ERROR_ALREADY_EXISTS:
+    logging.debug("Detected that the application is already running.")
+    win32api.CloseHandle(mutex_handle)
+    logging.debug("Mutex handle closed.")
+    sys.exit(0)
 
 # Check if the mutex already exists
 if win32api.GetLastError() == winerror.ERROR_ALREADY_EXISTS:
