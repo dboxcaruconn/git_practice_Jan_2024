@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 import tkinter as tk
 from PIL import Image, ImageTk
 import winerror
@@ -7,14 +8,18 @@ import win32event
 import win32api
 import win32con
 
+logging.basicConfig(filename='application.log', level=logging.DEBUG,
+                    format='%(asctime)s:%(levelname)s:%(message)s')
+
 # Unique name for the mutex (specific to your application)
-mutex_name = "window_test_pic"
+mutex_name = "window_test_pic_python_practice"
 
 # Try to create a mutex
 mutex_handle = win32event.CreateMutex(None, False, mutex_name)
 
 # Check if the mutex already exists
 if win32api.GetLastError() == winerror.ERROR_ALREADY_EXISTS:
+    win32api.CloseHandle(mutex_handle)
     print("Application is already running.")
     sys.exit(0)
 
@@ -32,6 +37,8 @@ def on_no_click():
 window = tk.Tk()
 
 def clean_up():
+    logging.info("Cleaning up and exiting.")
+    win32api.CloseHandle(mutex_handle)
     window.destroy()
     pass
 
