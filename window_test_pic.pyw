@@ -2,7 +2,7 @@ import os
 import sys
 
 # Path to the lock file
-lock_file_path = 'C:\\path\\to\\your\\lockfile.lock'
+lock_file_path = 'C:\\Temp\\tkinter_temp\\w'
 
 # Check if the lock file exists
 if os.path.exists(lock_file_path):
