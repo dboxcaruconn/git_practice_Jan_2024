@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
+        "filelock",
         "LANCZOS",
+        "levelname",
+        "portalocker",
         "winerror"
     ]
 }
